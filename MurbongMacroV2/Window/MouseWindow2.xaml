@@ -1,0 +1,25 @@
+﻿<Controls:MetroWindow x:Class="MurbongMacroV2.Window.MouseWindow2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MurbongMacroV2.Window"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+                      ResizeMode="CanMinimize"
+        Title="Mouse" Height="299" Width="172">
+    <Grid>
+        <Label VerticalContentAlignment="center" HorizontalContentAlignment="center" Content=":" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="71,52,0,0" Width="25" Height="26"/>
+        <TextBox x:Name="txt_x_pos" Controls:TextBoxHelper.Watermark="X-Pos" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="10,52,0,0"/>
+        <TextBox x:Name="txt_y_pos" Controls:TextBoxHelper.Watermark="Y-Pos" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="96,52,0,0"/>
+        <Expander Header="Random Pos" HorizontalAlignment="Left" Height="126" VerticalAlignment="Top" Width="147" Margin="10,87,0,0">
+            <Grid>
+                <RadioButton x:Name="radio_None" IsChecked="True" Content="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" Height="20" Width="117"/>
+                <RadioButton x:Name="radio_Circle" Content="RandCircle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0" Height="19" Width="117" Checked="RadioCheck"/>
+                <RadioButton x:Name="radio_Rect" Content="RandRect" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,39,0,0" Height="19" Width="117" Checked="RadioCheck"/>
+                <TextBox x:Name ="txtBox_MoveFactor" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="Factor" VerticalAlignment="Top" Width="117" Margin="10,60,0,0"/>
+            </Grid>
+        </Expander>
+        <Button x:Name="btnAdd" Style="{DynamicResource SquareButtonStyle}" Grid.Column="0" Content="변경" Margin="90,233,9,10"  FontFamily="NanumSquare Bold" Click="Edit" RenderTransformOrigin="0.504,0.933"/>
+    </Grid>
+</Controls:MetroWindow>

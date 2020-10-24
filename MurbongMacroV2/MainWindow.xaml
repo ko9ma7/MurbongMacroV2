@@ -6,18 +6,20 @@
                       xmlns:local="clr-namespace:MurbongMacroV2"
                       WindowStartupLocation="CenterScreen"
                       WindowTitleBrush="Aqua"
-                      Title="슬링어 거름탄" TitleAlignment="Center" Height="446" Width="800" ResizeMode="CanMinimize" FontFamily="NanumSquare Bold" Icon="159_0.ico"
-                      Loaded="Initializing">
+                      Title="Murbong Universal Control V2" TitleAlignment="Center" Height="446" Width="800" ResizeMode="CanMinimize" FontFamily="NanumSquare Bold" Icon="159_0.ico"
+                      Loaded="Initializing" Closed="MetroWindow_Closed">
     <Controls:MetroWindow.GlowBrush>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.DesktopColorKey}}"/>
     </Controls:MetroWindow.GlowBrush>
 
     <Grid x:Name="Root">
-
-
-        <TabControl Grid.Row="1" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="303*"/>
+            <ColumnDefinition Width="491*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.ColumnSpan="2" >
             <TabItem Header="메인">
-                <Grid>
+                <Grid Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="299*"/>
                         <RowDefinition Height="80*"/>
@@ -30,10 +32,9 @@
 
                     <TabControl x:Name="tab_Macro" Grid.Row="0" Grid.Column="0" >
                         <TabItem Header="키보드" Controls:ControlsHelper.HeaderFontSize="15" >
-                            <Grid>
-                                <Grid.ColumnDefinitions>
 
-                                </Grid.ColumnDefinitions>
+                            <Grid>
+
                                 <TextBox x:Name ="txt_Keyboard" Controls:TextBoxHelper.Watermark="원하는 키를 눌러주세요" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Margin="10,113,0,0" PreviewKeyDown="KeyToCode" Width="153"/>
                                 <ComboBox x:Name="cmb_Key" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Margin="79,220,0,0">
                                     <ComboBoxItem IsSelected="True">Press</ComboBoxItem>
@@ -41,6 +42,7 @@
                                 </ComboBox>
 
                             </Grid>
+
                         </TabItem>
                         <TabItem Header="마우스" Controls:ControlsHelper.HeaderFontSize="15">
                             <Grid>
@@ -64,14 +66,13 @@
                                     <TabItem Controls:ControlsHelper.HeaderFontSize="13" Header="MouseMove">
                                         <Grid >
                                             <Label VerticalContentAlignment="center" HorizontalContentAlignment="center" Content=":" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="71,52,0,0" Width="25" Height="26"/>
-                                            <Label x:Name ="lbl_MovePos" Content="현재 좌표 : 0 , 0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
                                             <TextBox x:Name="txt_x_pos" Controls:TextBoxHelper.Watermark="X-Pos" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="10,52,0,0"/>
                                             <TextBox x:Name="txt_y_pos" Controls:TextBoxHelper.Watermark="Y-Pos" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="96,52,0,0"/>
                                             <Expander Header="Random Pos" HorizontalAlignment="Left" Height="126" VerticalAlignment="Top" Width="147" Margin="10,87,0,0">
                                                 <Grid>
                                                     <RadioButton x:Name="radio_None" IsChecked="True" Content="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" Height="20" Width="117"/>
-                                                    <RadioButton x:Name="radio_Circle" Content="RandCircle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0" Height="19" Width="117"/>
-                                                    <RadioButton x:Name="radio_Rect" Content="RandRect" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,39,0,0" Height="19" Width="117"/>
+                                                    <RadioButton x:Name="radio_Circle" Content="RandCircle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0" Height="19" Width="117" Checked="RadioCheck"/>
+                                                    <RadioButton x:Name="radio_Rect" Content="RandRect" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,39,0,0" Height="19" Width="117" Checked="RadioCheck"/>
                                                     <TextBox x:Name ="txtBox_MoveFactor" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="Factor" VerticalAlignment="Top" Width="117" Margin="10,60,0,0"/>
                                                 </Grid>
                                             </Expander>
@@ -83,10 +84,10 @@
 
                             </Grid>
                         </TabItem>
-                        <TabItem Header="제어문" Controls:ControlsHelper.HeaderFontSize="15">
+                        <TabItem Header="제어문" Controls:ControlsHelper.HeaderFontSize="15" Margin="0,0,-8,0">
                             <Grid>
-                                <TabControl x:Name="tab_Control" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="173">
-                                    <TabItem Header="Delay" Controls:ControlsHelper.HeaderFontSize="10">
+                                <TabControl x:Name="tab_Control" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="173" Background="White">
+                                    <TabItem Header="Delay" Controls:ControlsHelper.HeaderFontSize="12">
                                         <Grid>
                                             <TextBox x:Name="txt_Delay" Controls:TextBoxHelper.Watermark="Base Delay(ms)" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="147" Margin="10,76,0,0" PreviewTextInput="NumberValidationTextBox"/>
                                             <TextBox x:Name="txt_Param1" Controls:TextBoxHelper.Watermark="Param1" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="54" Margin="10,136,0,0" PreviewTextInput="NumberValidationTextBox"/>
@@ -95,30 +96,61 @@
                                             <Label Content="~" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,136,0,0" Height="26" Width="26"/>
                                         </Grid>
                                     </TabItem>
-                                    <TabItem Header="LoopPreset"  Controls:ControlsHelper.HeaderFontSize="10">
+                                    <TabItem Header="Loop"  Controls:ControlsHelper.HeaderFontSize="12">
                                         <Grid>
-                                            <DataGrid x:Name="P_DataGrid2" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="147" Margin="10,10,0,0" AutoGenerateColumns="False" CanUserAddRows="false">
-                                                <DataGrid.Columns>
+                                            <Controls:NumericUpDown x:Name="Nud_Loop" Minimum="-1" Maximum="2147483647" Interval="1" StringFormat="N0" Margin="10,106,10,78" />
+                                            <TextBlock Text="몇번이나 반복? &#10; (현재 선택된 액션들을 반복.)" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,71,0,0" Width="167" Height="30"/>
+                                            <TextBlock Text="-1일시 무한반복! &#10; 0일시 병신" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,137,0,0" Width="167" Height="30"/>
 
-                                                    <DataGridTemplateColumn Header="Name">
-                                                        <DataGridTemplateColumn.CellTemplate>
-                                                            <DataTemplate>
-                                                                <TextBlock Text="{Binding Name}"/>
-                                                            </DataTemplate>
-                                                        </DataGridTemplateColumn.CellTemplate>
-                                                    </DataGridTemplateColumn>
-
-                                                    <DataGridTextColumn CanUserSort="false" Header="Description" Binding = "{Binding Description}"/>
-
-                                                </DataGrid.Columns>
-
-                                            </DataGrid>
-                                            <Controls:NumericUpDown  Minimum="-1" Maximum="2147483647" Interval="1" StringFormat="N0" Margin="10,165,10,42" />
-                                            <Button Content="새로고침" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="82,196,0,0" Click="Btn_Refresh"/>
                                         </Grid>
                                     </TabItem>
-                                    <TabItem Header="ImageSearch"  Controls:ControlsHelper.HeaderFontSize="9">
-                                        <Grid/>
+                                    <TabItem Header="Preset" Controls:ControlsHelper.HeaderFontSize="12">
+
+                                        <Grid>
+                                            <ComboBox x:Name="cmb_Preset" HorizontalAlignment="Left" VerticalAlignment="Top" Width="147" Margin="10,97,0,0"/>
+
+
+                                        </Grid>
+
+                                    </TabItem>
+                                    <TabItem Header="OCR" Controls:ControlsHelper.HeaderFontSize="12">
+
+                                        <Grid>
+                                            <Label VerticalContentAlignment="center" HorizontalContentAlignment="center" Content=":" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Height="26" Margin="71,1,0,0"/>
+                                            <TextBox x:Name="ocr_x_image" Controls:TextBoxHelper.Watermark="X-Pos" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="10,1,0,0"/>
+                                            <TextBox x:Name="ocr_y_image" Controls:TextBoxHelper.Watermark="Y-Pos" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="96,1,0,0" RenderTransformOrigin="0.541,-0.346"/>
+                                            <Label VerticalContentAlignment="center" HorizontalContentAlignment="center" Content=":" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Height="26" Margin="71,32,0,0"/>
+                                            <TextBox x:Name="ocr_w_image" Controls:TextBoxHelper.Watermark="Width" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="10,32,0,0"/>
+                                            <TextBox x:Name="ocr_h_image" Controls:TextBoxHelper.Watermark="Height" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="96,32,0,0" RenderTransformOrigin="0.541,-0.346"/>
+                                            <CheckBox x:Name ="ocr_engkor" Content="EN or KR(true)" Width="100" Margin="33,120,34,67" Click="Chk_mousemove_Checked"/>
+                                            <TextBox x:Name="ocr_image_regex" Controls:TextBoxHelper.Watermark="REGEX" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" Margin="10,94,0,0"/>
+                                            <ComboBox x:Name ="ocr_success" Margin="10,143,10,41"/>
+                                            <ComboBox x:Name ="ocr_fail" Margin="10,174,10,10"/>
+                                        </Grid>
+
+                                    </TabItem>
+                                    <TabItem Header="ImageSearch"  Controls:ControlsHelper.HeaderFontSize="12">
+                                        <Grid>
+                                            <Label VerticalContentAlignment="center" HorizontalContentAlignment="center" Content=":" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Height="26" Margin="71,1,0,0"/>
+                                            <TextBox x:Name="txt_x_image" Controls:TextBoxHelper.Watermark="X-Pos" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="10,1,0,0"/>
+                                            <TextBox x:Name="txt_y_image" Controls:TextBoxHelper.Watermark="Y-Pos" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="96,1,0,0" RenderTransformOrigin="0.541,-0.346"/>
+                                            <Label VerticalContentAlignment="center" HorizontalContentAlignment="center" Content=":" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Height="26" Margin="71,32,0,0"/>
+                                            <TextBox x:Name="txt_w_image" Controls:TextBoxHelper.Watermark="Width" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="10,32,0,0"/>
+                                            <TextBox x:Name="txt_h_image" Controls:TextBoxHelper.Watermark="Height" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="96,32,0,0" RenderTransformOrigin="0.541,-0.346"/>
+                                            <TextBox x:Name="txt_image_tolerance" Controls:TextBoxHelper.Watermark="Tolerance" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" Margin="10,94,0,0"/>
+                                            <ComboBox x:Name ="cmb_image" Margin="10,63,10,121"/>
+                                            <ComboBox x:Name ="cmb_success" Margin="10,143,10,41"/>
+                                            <ComboBox x:Name ="cmb_fail" Margin="10,174,10,10"/>
+                                            <CheckBox x:Name ="chk_mousemove" Content="MouseMove" Width="100" Margin="33,120,34,67" Click="Chk_mousemove_Checked"/>
+
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Alarm"  Controls:ControlsHelper.HeaderFontSize="12">
+                                        <Grid>
+
+                                            <TextBox x:Name="txt_Freq" Controls:TextBoxHelper.Watermark="Freq" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Margin="10,88,0,0"/>
+
+                                        </Grid>
                                     </TabItem>
 
                                 </TabControl>
@@ -126,10 +158,10 @@
                             </Grid>
                         </TabItem>
                     </TabControl>
-                    <Button x:Name="btnAdd" Style="{DynamicResource SquareButtonStyle}" Grid.Row="1" Grid.Column="0" Content="추가" Margin="91,39,10,10"  FontFamily="NanumSquare Bold" Click="AddPreset"/>
-                    <DataGrid x:Name="M_DataGrid" Grid.Column="2" AutoGenerateColumns="False" CanUserAddRows="false">
-                        <DataGrid.Columns>
 
+                    <Button x:Name="btnAdd" Style="{DynamicResource SquareButtonStyle}" Grid.Row="1" Grid.Column="0" Content="추가" Margin="91,35,10,14"  FontFamily="NanumSquare Bold" Click="AddPreset"/>
+                    <DataGrid x:Name="M_DataGrid" Grid.Column="2" AutoGenerateColumns="False" CanUserAddRows="false" MouseRightButtonDown="EditCell">
+                        <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Control">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -149,23 +181,24 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button x:Name ="btnRun" Style="{DynamicResource SquareButtonStyle}" Content="실행" Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Width="75" Margin="501,39,10,0" Height="26" Click="Btn_Run"/>
-                    <Button x:Name="btnRemove" Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Grid.Column="2" Margin="10,5,0,0" Grid.Row="1" Height="17" Click="RemoveData"/>
-                    <Button x:Name="btnCopy" Content="Copy" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Grid.Column="2" Margin="69,5,0,0" Grid.Row="1" Height="17" Click="CopyData"/>
-                    <Button x:Name="btnUp" Content="Λ" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Grid.Column="2" Margin="246,5,0,0" Grid.Row="1" Height="17" Click="UpData"/>
-                    <Button x:Name="btnDown" Content="V" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Grid.Column="2" Margin="271,5,0,0" Grid.Row="1" Height="17" Click="DownData"/>
-                    <Button x:Name="btnSave" Content="Import" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Grid.Column="2" Margin="128,5,0,0" Grid.Row="1" Height="21" Click="ImportData"/>
-                    <Button x:Name="btnLoad" Content="Export" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Grid.Column="2" Margin="187,5,0,0" Grid.Row="1" Height="21" Click="ExportData"/>
+                    <Button x:Name="btnRemove" Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Grid.Column="2" Margin="10,5,0,0" Grid.Row="1" Height="17" Click="RemoveData" Background="White"/>
+                    <Button x:Name="btnCopy" Content="Copy" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Grid.Column="2" Margin="69,5,0,0" Grid.Row="1" Height="17" Click="CopyData" Background="White"/>
+                    <Button x:Name="btnUp" Content="Λ" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Grid.Column="2" Margin="246,5,0,0" Grid.Row="1" Height="17" Click="UpData" Background="White"/>
+                    <Button x:Name="btnDown" Content="V" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Grid.Column="2" Margin="271,5,0,0" Grid.Row="1" Height="17" Click="DownData" Background="White"/>
+                    <Button x:Name="btnSave" Content="Import" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Grid.Column="2" Margin="128,5,0,0" Grid.Row="1" Height="21" Click="ImportData" Background="White"/>
+                    <Button x:Name="btnLoad" Content="Export" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Grid.Column="2" Margin="187,5,0,0" Grid.Row="1" Height="21" Click="ExportData" Background="White"/>
 
 
 
 
 
                 </Grid>
-            </TabItem>
-            <TabItem Header="프리셋">
 
-                <Grid  >
-                    <DataGrid x:Name="P_DataGrid" HorizontalAlignment="Left" Height="293" VerticalAlignment="Top" Width="768" Margin="10,10,0,0" AutoGenerateColumns="False" CanUserAddRows="false">
+            </TabItem>
+            <TabItem Header="프리셋" HorizontalAlignment="Right" Width="92">
+
+                <Grid  Background="#FFF9F9F9" >
+                    <DataGrid x:Name="P_DataGrid" HorizontalAlignment="Left" Width="788" AutoGenerateColumns="False" CanUserAddRows="false" Margin="0,0,0,69">
                         <DataGrid.Columns>
 
                             <DataGridTemplateColumn Header="Name">
@@ -176,29 +209,85 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTextColumn CanUserSort="false" Header="Description" Binding = "{Binding Description}"/>
+                            <DataGridTextColumn CanUserSort="false" Header="Description" Binding = "{Binding Description}" />
 
                         </DataGrid.Columns>
 
 
                     </DataGrid>
-                    <Button Content="새로고침" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,308,0,0" Click="Btn_Refresh"/>
-                    <Button Content="메인으로 보내기" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="90,308,0,0" Click="Btn_Refresh"/>
-                    <Button Content="영구 제거" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="182,308,0,0" Click="Btn_Refresh"/>
+                    <Button Content="새로고침" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,308,0,0" Click="Btn_Refresh" Background="White"/>
+                    <Button Content="메인으로 보내기" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="90,308,0,0" Click="Btn_CopyToMain" Background="White"/>
+                    <Button Content="모두 저장" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="182,308,0,0" Click="Btn_SaveAll" Background="White"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="독립실행기">
+                <Grid  Background="#FFF9F9F9" >
+                    <DataGrid x:Name="IndeGrid" HorizontalAlignment="Left" Width="605" AutoGenerateColumns="False" CanUserAddRows="false" Margin="183,0,0,69" PreviewKeyDown="IndeGrid_PreviewKeyDown">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="HOTKEY">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding HotkeyName}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="PresetName">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn CanUserSort="false" Header="Description" Binding = "{Binding Description}" />
+                            <DataGridTextColumn CanUserSort="false" Header="Activation" Binding = "{Binding Activation}" />
+
+                        </DataGrid.Columns>
+
+
+                    </DataGrid>
+                    <TextBox x:Name ="Txt_IndeHotkey" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="F5" VerticalAlignment="Top" Width="168" Margin="10,155,0,0" PreviewKeyDown="Txt_Hotkey_KeyDown"/>
+                    <Button x:Name="IndebtnAdd" Style="{DynamicResource SquareButtonStyle}" Grid.Column="0" Content="추가" Margin="100,308,610,34"  FontFamily="NanumSquare Bold" Click="AddIndePreset"/>
+                    <ComboBox x:Name="cmb_IndePreset" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Margin="10,124,0,0"/>
                 </Grid>
             </TabItem>
             <TabItem Header="이미지">
-                <Grid  >
+                <Grid  Background="#FFF9F9F9" >
+                    <Image x:Name="img_Source" HorizontalAlignment="Left" Height="252" Margin="10,10,0,0" VerticalAlignment="Top" Width="252"/>
+                    <Image x:Name="img_Find" HorizontalAlignment="Left" Height="252" Margin="526,10,0,0" VerticalAlignment="Top" Width="252"/>
+                    <Label Content="캡처된 이미지" HorizontalAlignment="Left" Margin="10,267,0,0" VerticalAlignment="Top"/>
+                    <Label Content="비교하는 이미지" HorizontalAlignment="Left" Margin="689,267,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbl_similarity" Content="유사도 : 0" HorizontalAlignment="Left" Margin="267,267,0,0" VerticalAlignment="Top" Width="254"/>
+
+
                 </Grid>
             </TabItem>
             <TabItem Header="설정">
-                <Grid  >
+                <Grid  Background="#FFF9F9F9" ScrollViewer.CanContentScroll="True" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="255*"/>
+                        <ColumnDefinition Width="533*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name ="Txt_RunHotkey" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="F8" VerticalAlignment="Top" Width="164" Margin="359,11,0,0" PreviewKeyDown="Txt_Hotkey_KeyDown" Grid.Column="1"/>
+                    <TextBox x:Name ="Txt_MouseHotkey" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="F9" VerticalAlignment="Top" Width="164" Margin="359,42,0,0" PreviewKeyDown="Txt_Hotkey_KeyDown" Grid.Column="1"/>
+                    <TextBox x:Name ="Txt_FactorHotkey" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="F10" VerticalAlignment="Top" Width="164" Margin="359,73,0,0" PreviewKeyDown="Txt_Hotkey_KeyDown" Grid.Column="1"/>
+                    <TextBox x:Name ="Txt_CaptureHotkey" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="F11" VerticalAlignment="Top" Width="164" Margin="359,104,0,0" PreviewKeyDown="Txt_Hotkey_KeyDown" Grid.Column="1"/>
+                    <Label Content="매크로 실행 : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="276,13,0,0" Grid.Column="1"/>
+                    <Label Content="마우스 위치 설정 : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="251,44,0,0" Grid.Column="1"/>
+                    <Label Content="마우스 랜덤 인자 설정 : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="226,75,0,0" Grid.Column="1"/>
+                    <Label Content="이미지 캡쳐 설정 : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="251,106,0,0" Grid.Column="1"/>
+                    <Controls:ToggleSwitch x:Name="Win7Switch" Header="Win7모드" Margin="393,135,19,170" Click="ToggleSwitch_Checked" Grid.Column="1"/>
+                    <Controls:ToggleSwitch x:Name="SoftSwitch" Header="소프트웨어모드" Margin="393,207,19,98" Click="ToggleSwitch_Checked" Grid.Column="1"/>
+                    <TextBox x:Name ="DebugPanel" HorizontalAlignment="Left" Height="192" Margin="10,10,0,0" TextWrapping="Wrap" Text="Murbong MacroV2" VerticalAlignment="Top" Width="466" Grid.ColumnSpan="2" AcceptsReturn="True" AcceptsTab="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True"/>
+                    <Controls:ToggleSwitch x:Name="ServerSwitch" Header="서버온오프" Margin="10,207,124,98" Click="ServerSwitch_Click"/>
+
                 </Grid>
             </TabItem>
         </TabControl>
-        <ProgressBar IsIndeterminate="false" x:Name ="M_ProgressBar" Minimum="0" Maximum="100" Height="10" VerticalAlignment="Top" Margin="0,403,0,0"/>
+        <ProgressBar IsIndeterminate="false" x:Name ="M_ProgressBar" Minimum="0" Maximum="1" Height="10" VerticalAlignment="Top" Margin="0,403,0,0" Grid.ColumnSpan="2"/>
 
-        <TextBlock x:Name="TxtBlock" Text="Murbong Idle" TextAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="211,376,211,3" Grid.Row="1" Height="16" Width="372" />
+        <TextBlock x:Name="TxtBlock" Text="Murbong Idle" TextAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="211,382,211,19" Height="16" Width="372" Grid.ColumnSpan="2" />
+
+
     </Grid>
 
 </Controls:MetroWindow>

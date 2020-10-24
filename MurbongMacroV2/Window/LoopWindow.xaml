@@ -1,0 +1,17 @@
+﻿<Controls:MetroWindow x:Class="MurbongMacroV2.Window.LoopWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MurbongMacroV2.Window"
+       xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+                      ResizeMode="CanMinimize"
+        Title="LoopWindow" Height="192.334" Width="193.333">
+    <Grid>
+        <Controls:NumericUpDown x:Name="Nud_Loop" Minimum="-1" Maximum="2147483647" Interval="1" StringFormat="N0" Margin="10,45,10,0" Height="26" VerticalAlignment="Top" />
+        <TextBlock Text="몇번이나 반복? &#10; (현재 선택된 액션들을 반복.)" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="167" Height="30"/>
+        <TextBlock Text="-1일시 무한반복! &#10; 0일시 병신" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,76,0,0" Width="167" Height="30"/>
+        <Button x:Name="btnAdd" Style="{DynamicResource SquareButtonStyle}" Grid.Column="0" Content="변경" Margin="104,126,10,10"  FontFamily="NanumSquare Bold" Click="Edit"/>
+    </Grid>
+</Controls:MetroWindow>
